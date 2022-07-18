@@ -1,10 +1,7 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          Edit Brand
-        </b>
-        </h2>
-    </x-slot>
+@extends('admin.admin_master')
+
+@section('admin')
+
 
 
     @if(session('success'))
@@ -63,4 +60,4 @@
     </div>
         </div>
     </div>
-</x-app-layout>
+@endsection

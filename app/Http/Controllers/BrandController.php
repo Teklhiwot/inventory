@@ -7,6 +7,8 @@ use App\Models\Brand;
 use App\Models\Multipic;
 use Illuminate\Support\Carbon;
 use Image;
+use Auth;
+
 
 class BrandController extends Controller
 {
@@ -51,7 +53,13 @@ class BrandController extends Controller
 
 
         ]);
-              return Redirect()->back()->with('success','Brand Inserted successfully');
+
+        $notification= array(
+            'message'=> 'Brand Inserted Successfully',
+            'alert-type'=>'success'
+        );
+
+              return Redirect()->back()->with($notification);
             
 
     }
@@ -95,7 +103,13 @@ class BrandController extends Controller
 
 
         ]);
-              return Redirect()->back()->with('success','Brand Updated successfully');
+
+
+        $notification= array(
+            'message'=> 'Brand Updated Successfully',
+            'alert-type'=>'info'
+        );
+              return Redirect()->back()->with($notification);
 
         }
 
@@ -108,7 +122,12 @@ class BrandController extends Controller
     
     
             ]);
-                  return Redirect()->back()->with('success','Brand Updated successfully');
+
+            $notification= array(
+                'message'=> 'Brand Updated Successfully',
+                'alert-type'=>'info'
+            );
+                  return Redirect()->back()->with($notification);
     
         }
 
@@ -122,7 +141,13 @@ class BrandController extends Controller
         unlink($oldimg);
         Brand::find($id)->delete();
 
-        return Redirect()->back()->with('success','Brand Deleted successfully');
+        $notification= array(
+            'message'=> 'Brand Deleted Successfully',
+            'alert-type'=>'error'
+        );
+              return Redirect()->back()->with($notification);
+
+        
     }
 
     // This below is for Multi Image  Methods
@@ -161,5 +186,10 @@ class BrandController extends Controller
 
    }
 
+   public function Logout()
+   {
+        Auth::logout();
 
+        return Redirect()->route('login')->with('Success','User logout');
+   }
 }
